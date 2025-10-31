@@ -421,10 +421,8 @@ class Rhel(Distro):
             sshd_file = "\n%post \n"+mpath_file+"\n%end"
         if version.startswith('9') or version.startswith('10'):
             sshd_file = "\n%post \nsed -i 's/#\?PermitRootLogin.*/PermitRootLogin yes/g' /etc/ssh/sshd_config;service sshd restart"+mpath_file+"\n%end"
-        if version.startswith('10'):
-            timezone = ""
-        else:
-            timezone = "--isUtc"
+        
+        timezone = "--utc"
 
         inst_param = "%pre\n%end\nurl "+urlstring, "\ntext\nkeyboard"\
                      " --vckeymap=us --xlayouts='us'\nlang en_US.UTF-8\n"\
